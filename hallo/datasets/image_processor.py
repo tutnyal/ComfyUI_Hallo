@@ -101,7 +101,7 @@ class ImageProcessor:
         )
         self.face_analysis.prepare(ctx_id=0, det_size=(640, 640))
 
-    def preprocess(self, source_image_path: str, cache_dir: str, face_region_ratio: float):
+    def preprocess(self, source_image_path: str, cache_dir: str, face_region_ratio: float, landmark_model_path: str):
         """
         Apply preprocessing to the source image to prepare for face analysis.
 
@@ -135,7 +135,7 @@ class ImageProcessor:
         face_emb = face["embedding"]
 
         # 2.3 render face mask
-        get_mask(source_image_path, cache_dir, face_region_ratio)
+        get_mask(source_image_path, cache_dir, face_region_ratio, landmark_model_path)
         file_name = os.path.basename(source_image_path).split(".")[0]
         face_mask_pil = Image.open(
             os.path.join(cache_dir, f"{file_name}_face_mask.png")).convert("RGB")

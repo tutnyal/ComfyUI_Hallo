@@ -161,7 +161,7 @@ def inference_process(args: argparse.Namespace):
         source_image_full_mask, \
         source_image_face_mask, \
         source_image_lip_mask = image_processor.preprocess(
-            source_image_path, save_path, config.face_expand_ratio)
+            source_image_path, save_path, config.face_expand_ratio, config.face_landmarker.model_path)
 
     # 3.2 prepare audio embeddings
     sample_rate = config.data.driving_audio.sample_rate

@@ -346,7 +346,7 @@ def compute_face_landmarks(detection_result, h, w):
     return [[p.x * w, p.y * h] for p in face_landmarks_list[0]]
 
 
-def get_landmark(file):
+def get_landmark(file, model_path):
     """
     This function takes a file as input and returns the facial landmarks detected in the file.
 
@@ -356,7 +356,7 @@ def get_landmark(file):
     Returns:
         Tuple[List[float], List[float]]: A tuple containing two lists of floats representing the x and y coordinates of the facial landmarks.
     """
-    model_path = "pretrained_models/face_analysis/models/face_landmarker_v2_with_blendshapes.task"
+    # model_path = "pretrained_models/face_analysis/models/face_landmarker_v2_with_blendshapes.task"
     BaseOptions = mp.tasks.BaseOptions
     FaceLandmarker = mp.tasks.vision.FaceLandmarker
     FaceLandmarkerOptions = mp.tasks.vision.FaceLandmarkerOptions
@@ -422,7 +422,7 @@ def get_face_mask(landmarks, height, width, out_path, expand_ratio):
     cv2.imwrite(str(out_path), face_mask)
 
 
-def get_mask(file, cache_dir, face_expand_raio):
+def get_mask(file, cache_dir, face_expand_raio, landmark_model_path):
     """
     Generate a face mask based on the given landmarks and save it to the specified cache directory.
 
@@ -433,7 +433,7 @@ def get_mask(file, cache_dir, face_expand_raio):
     Returns:
         None
     """
-    landmarks, height, width = get_landmark(file)
+    landmarks, height, width = get_landmark(file, landmark_model_path)
     file_name = os.path.basename(file).split(".")[0]
     get_lip_mask(landmarks, height, width, os.path.join(
         cache_dir, f"{file_name}_lip_mask.png"))

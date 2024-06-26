@@ -36,6 +36,9 @@ audio_separator:
 vae:
   model_path: ./pretrained_models/sd-vae-ft-mse
 
+face_landmarker:
+  model_path: ./pretrained_models/face_analysis/models/face_landmarker_v2_with_blendshapes.task
+
 save_path: ./.cache
 
 face_expand_ratio: 1.2
